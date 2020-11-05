@@ -1,0 +1,45 @@
+{
+    "name": "richcongress/fixture-test-bundle",
+    "description": "A Symfony bundle to generate easily fixtures",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "RichCongress",
+            "homepage": "https://www.richcongress.com"
+        }
+    ],
+    "support": {
+        "email": "contact@richcongress.com",
+        "source": "https://github.com/richcongress/fixture-test-bundle",
+        "docs": "https://github.com/richcongress/fixture-test-bundle/blob/master/README.md",
+        "issues": "https://github.com/richcongress/fixture-test-bundle/issues"
+    },
+    "require": {
+        "php": ">=7.3",
+        "php-di/phpdoc-reader": "^2.2",
+        "richcongress/bundle-toolbox": "*",
+        "richcongress/test-tools": "dev-master",
+        "symfony/console": "^4.0|^5.0"
+    },
+    "require-dev": {
+        "doctrine/annotations": "^1.11",
+        "nelmio/alice": "^3.7",
+        "roave/security-advisories": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "RichCongress\\FixtureTestBundle\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RichCongress\\FixtureTestBundle\\Tests\\": "Tests/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin",
+        "discard-changes": true,
+        "sort-packages": true
+    }
+}

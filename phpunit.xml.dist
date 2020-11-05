@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" colors="true" bootstrap="vendor/autoload.php" failOnWarning="true" failOnRisky="true" forceCoversAnnotation="true">
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">.</directory>
+        </include>
+
+        <exclude>
+            <directory>app</directory>
+            <directory>bin</directory>
+            <directory>DependencyInjection</directory>
+            <directory>Doctrine/Functions</directory>
+            <directory>PHPUnit</directory>
+            <directory>Resources</directory>
+            <directory>Tests</directory>
+            <directory>var</directory>
+            <directory>vendor</directory>
+            <file>phpunit-filter.php</file>
+            <file>RichCongressUnitBundle.php</file>
+        </exclude>
+    </coverage>
+
+    <php>
+        <ini name="error_reporting" value="-1"/>
+        <env name="CONFIG_TYPE" value="default"/>
+    </php>
+
+    <testsuites>
+        <testsuite name="Project Test Suite">
+            <directory suffix="Test.php">Tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
