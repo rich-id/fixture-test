@@ -80,7 +80,7 @@ final class ConfigurationGuesserRegistry implements ConfigurationGuesserRegistry
                     return 0;
                 }
 
-                return ($priority1 < $priority2) ? -1 : 1;
+                return ($priority1 > $priority2) ? -1 : 1;
             }
         );
 
@@ -103,7 +103,7 @@ final class ConfigurationGuesserRegistry implements ConfigurationGuesserRegistry
                     return 0;
                 }
 
-                return ($priority1 < $priority2) ? -1 : 1;
+                return ($priority1 > $priority2) ? -1 : 1;
             }
         );
 

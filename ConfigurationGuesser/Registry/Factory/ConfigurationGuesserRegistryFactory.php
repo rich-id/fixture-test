@@ -3,6 +3,11 @@
 namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\Factory;
 
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\ClassGuesser\DefaultClassConfigurationGuesser;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\DateTimePropertyGuesser;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\DateUpdatePropertyGuesser;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\EmailPropertyGuesser;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\IdPropertyGuesser;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\UsernamePropertyGuesser;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\ConfigurationGuesserRegistry;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\ConfigurationGuesserRegistryInterface;
 
@@ -22,7 +27,11 @@ class ConfigurationGuesserRegistryFactory implements ConfigurationGuesserRegistr
 
     /** @var string[] */
     protected static $propertyConfigurationGuessers = [
-
+        DateTimePropertyGuesser::class,
+        DateUpdatePropertyGuesser::class,
+        EmailPropertyGuesser::class,
+        IdPropertyGuesser::class,
+        UsernamePropertyGuesser::class,
     ];
 
     public function create(): ConfigurationGuesserRegistryInterface
@@ -42,5 +51,12 @@ class ConfigurationGuesserRegistryFactory implements ConfigurationGuesserRegistr
         }
 
         return $registry;
+    }
+
+    public static function createRegistry(): ConfigurationGuesserRegistryInterface
+    {
+        $factory = new static();
+
+        return $factory->create();
     }
 }

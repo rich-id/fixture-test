@@ -2,8 +2,6 @@
 
 namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser;
 
-use Doctrine\Common\Annotations\AnnotationReader;
-
 /**
  * Class IdPropertyGuesser
  *

@@ -1,7 +1,7 @@
 {
-    "name": "richcongress/fixture-test-bundle",
-    "description": "A Symfony bundle to generate easily fixtures",
-    "type": "symfony-bundle",
+    "name": "richcongress/fixture-test",
+    "description": "Generate random and meaningful data for objects",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -17,6 +17,7 @@
     },
     "require": {
         "php": ">=7.3",
+        "nelmio/alice": "^3.7",
         "php-di/phpdoc-reader": "^2.2",
         "richcongress/bundle-toolbox": "*",
         "richcongress/test-tools": "dev-master",
@@ -24,7 +25,6 @@
     },
     "require-dev": {
         "doctrine/annotations": "^1.11",
-        "nelmio/alice": "^3.7",
         "roave/security-advisories": "dev-master"
     },
     "autoload": {

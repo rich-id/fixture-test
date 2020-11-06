@@ -22,14 +22,14 @@ class DateTimePropertyGuesser extends AbstractPropertyConfigurationGuesser
     protected static $priority = -50;
 
     /** @var string */
-    protected static $lowerBound = '"-100 years"';
+    protected static $lowerBound = '"-200 days"';
 
     /** @var string */
     protected static $higherBound = '"now"';
 
     public function guess(\ReflectionProperty $reflectionProperty): string
     {
-        return sprintf('<dateTimeBetween(%s, %s)', static::$lowerBound, static::$higherBound);
+        return sprintf('<dateTimeBetween(%s, %s)>', static::$lowerBound, static::$higherBound);
     }
 
     public function supports(\ReflectionProperty $reflectionProperty): bool

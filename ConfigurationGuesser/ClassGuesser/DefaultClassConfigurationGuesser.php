@@ -22,13 +22,24 @@ class DefaultClassConfigurationGuesser extends AbstractClassConfigurationGuesser
         $class = $reflectionClass->getName();
 
         if (!array_key_exists($class, static::$guessesCache)) {
-            static::$guessesCache[$class] = [];
+            $config = [];
 
             foreach ($reflectionClass->getProperties() as $reflectionProperty) {
                 $name = $reflectionProperty->getName();
-                $guesser = $this->configurationGuesserRegistry->getPropertyConfigurationGuesser($reflectionProperty);
-                $guessesCache[$class][$name] = $guesser->guess($reflectionProperty);
+
+                try {
+                    $guesser = $this->configurationGuesserRegistry->getPropertyConfigurationGuesser($reflectionProperty);
+                    $value = $guesser->guess($reflectionProperty);
+
+                    if ($value !== null) {
+                        $config[$name] = $value;
+                    }
+                } catch (\LogicException $e) {
+                    // Skipped
+                }
             }
+
+            static::$guessesCache[$class] = $config;
         }
 
         return static::$guessesCache[$class];

@@ -2,31 +2,32 @@
 
 namespace RichCongress\FixtureTestBundle\Tests\ConfigurationGuesser;
 
-use RichCongress\FixtureTestBundle\ConfigurationGuesser\ClassConfigurationGuesser;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\Factory\ConfigurationGuesserRegistryFactory;
 use RichCongress\FixtureTestBundle\Tests\Resources\Object\DummyUser;
 use RichCongress\TestTools\TestCase\TestCase;
 
 /**
- * ClassGuesser ClassConfigurationGuesserTest
+ * ClassGuesser DefaultClassConfigurationGuesserTest
  *
  * @package    RichCongress\FixtureTestBundle\Tests\ConfigurationGuesser
  * @author     Nicolas Guilloux <nguilloux@richcongress.com>
  * @copyright  2014 - 2020 RichCongress (https://www.richcongress.com)
  *
- * @covers \RichCongress\FixtureTestBundle\ConfigurationGuesser\DefaultClassConfigurationGuesser
+ * @covers \RichCongress\FixtureTestBundle\ConfigurationGuesser\ClassGuesser\DefaultClassConfigurationGuesser
  */
-final class ClassConfigurationGuesserTest extends TestCase
+final class DefaultClassConfigurationGuesserTest extends TestCase
 {
     public function testGuessDummyUser(): void
     {
-        $guesser = new ClassConfigurationGuesser();
-        $configuration = $guesser->guess(DummyUser::class);
+        $registry = ConfigurationGuesserRegistryFactory::createRegistry();
+        $reflectionClass = new \ReflectionClass(DummyUser::class);
+        $guesser = $registry->getClassConfigurationGuesser($reflectionClass);
+        $configuration = $guesser->guess($reflectionClass);
 
         self::assertEquals(
             [
                 'email'      => '<email()>',
                 'username'   => '<username()>',
-                'password'   => '',
                 'dateAdd'    => '<dateTimeBetween("-200 days", "now")>',
                 'dateUpdate' => '<dateTimeBetween($dateAdd, "now")>',
             ],

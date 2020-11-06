@@ -44,12 +44,14 @@ final class FixtureGenerator
     public function generate(string $class, array $parameters = [])
     {
         $reflectionClass = new \ReflectionClass($class);
-        $config = $this->configurationGuesserRegistry->getClassConfigurationGuesser($reflectionClass);
+        $guesser = $this->configurationGuesserRegistry->getClassConfigurationGuesser($reflectionClass);
+        $guessedConfig = $guesser->guess($reflectionClass);
+        $configuration = array_merge($guessedConfig, $parameters);
 
         $objectSet = $this->getDataLoader()->loadData(
             [
                 $class => [
-                    'object' => $config,
+                    'object' => $configuration,
                 ]
             ]
         );
