@@ -20,3 +20,8 @@ override(
     StaticGenerator::generate(0, 1),
     type(0)
 );
+
+override(
+    StaticGenerator::make(0, 1),
+    type(0)
+);

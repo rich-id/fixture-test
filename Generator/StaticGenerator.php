@@ -18,6 +18,11 @@ final class StaticGenerator implements GeneratorInterface
      */
     public function generate(string $class, array $parameters = [])
     {
+        return static::make($class, $parameters);
+    }
+
+    public static function make(string $class, array $parameters = [])
+    {
         $object = new $class();
 
         foreach ($parameters as $property => $value) {
