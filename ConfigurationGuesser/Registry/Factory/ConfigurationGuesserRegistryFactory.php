@@ -5,9 +5,8 @@ namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\Factory;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\ClassGuesser\DefaultClassConfigurationGuesser;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\DateTimePropertyGuesser;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\DateUpdatePropertyGuesser;
-use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\EmailPropertyGuesser;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\FakerFormatterNamePropertyGuesser;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\IdPropertyGuesser;
-use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\UsernamePropertyGuesser;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\ConfigurationGuesserRegistry;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\ConfigurationGuesserRegistryInterface;
 
@@ -29,12 +28,11 @@ class ConfigurationGuesserRegistryFactory implements ConfigurationGuesserRegistr
     protected static $propertyConfigurationGuessers = [
         DateTimePropertyGuesser::class,
         DateUpdatePropertyGuesser::class,
-        EmailPropertyGuesser::class,
+        FakerFormatterNamePropertyGuesser::class,
         IdPropertyGuesser::class,
-        UsernamePropertyGuesser::class,
     ];
 
-    public function create(): ConfigurationGuesserRegistryInterface
+    public function create(string $lang = 'en_UK'): ConfigurationGuesserRegistryInterface
     {
         $registry = new ConfigurationGuesserRegistry();
 

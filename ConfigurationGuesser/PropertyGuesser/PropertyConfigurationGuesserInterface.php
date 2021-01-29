@@ -3,6 +3,7 @@
 namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser;
 
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\ConfigurationGuesserInterface;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\Context;
 
 /**
  * Interface PropertyConfigurationGuesserInterface
@@ -13,6 +14,6 @@ use RichCongress\FixtureTestBundle\ConfigurationGuesser\ConfigurationGuesserInte
  */
 interface PropertyConfigurationGuesserInterface extends ConfigurationGuesserInterface
 {
-    public function guess(\ReflectionProperty $reflectionProperty);
-    public function supports(\ReflectionProperty $reflectionProperty): bool;
+    public function guess(\ReflectionProperty $reflectionProperty, Context $context);
+    public function supports(\ReflectionProperty $reflectionProperty, Context $context): bool;
 }

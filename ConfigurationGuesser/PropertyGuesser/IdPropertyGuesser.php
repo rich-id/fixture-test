@@ -2,6 +2,8 @@
 
 namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser;
 
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\Context;
+
 /**
  * Class IdPropertyGuesser
  *
@@ -13,12 +15,12 @@ class IdPropertyGuesser extends AbstractPropertyConfigurationGuesser
 {
     protected static $priority = 100;
 
-    public function guess(\ReflectionProperty $reflectionProperty): ?int
+    public function guess(\ReflectionProperty $reflectionProperty, Context $context): ?int
     {
         return null;
     }
 
-    public function supports(\ReflectionProperty $reflectionProperty): bool
+    public function supports(\ReflectionProperty $reflectionProperty, Context $context): bool
     {
         return $reflectionProperty->getName() === 'id';
     }

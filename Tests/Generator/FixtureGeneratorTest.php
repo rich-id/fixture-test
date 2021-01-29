@@ -2,6 +2,7 @@
 
 namespace RichCongress\FixtureTestBundle\Tests\Generator;
 
+use Faker\Factory;
 use RichCongress\FixtureTestBundle\Generator\FixtureGenerator;
 use RichCongress\FixtureTestBundle\Tests\Resources\Object\DummyUser;
 use RichCongress\TestTools\TestCase\TestCase;
@@ -21,17 +22,18 @@ final class FixtureGeneratorTest extends TestCase
     {
         $generator = new FixtureGenerator();
         /** @var DummyUser $user */
-        $user = $generator->generate(DummyUser::class);
+        $user = $generator->setLocale('fr_Fr')->generate(DummyUser::class);
 
         self::assertInstanceOf(DummyUser::class, $user);
         self::assertNull($user->getId());
         self::assertMatchesRegularExpression('/(\w*)@(\w*).(\w*)/', $user->getEmail());
         self::assertNotNull($user->getUsername());
-        self::assertNull($user->getPassword());
+        self::assertNotNull($user->getPassword());
         self::assertLessThanOrEqual(
             $user->getDateUpdate(),
             $user->getDateAdd()
         );
+        var_dump($user);
     }
 
     public function testGenerationForUserWithForcedParameters(): void

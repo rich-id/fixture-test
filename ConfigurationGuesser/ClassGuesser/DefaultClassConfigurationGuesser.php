@@ -2,6 +2,8 @@
 
 namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\ClassGuesser;
 
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\Context;
+
 /**
  * Class DefaultClassConfigurationGuesser
  *
@@ -15,63 +17,43 @@ class DefaultClassConfigurationGuesser extends AbstractClassConfigurationGuesser
     protected static $priority = -100;
 
     /** @var array<string, array<string, mixed>> */
-    protected static $guessesCache = [];
+    protected $guessesCache = [];
 
-    public function guess(\ReflectionClass $reflectionClass): array
+    public function guess(\ReflectionClass $reflectionClass, Context $context): array
     {
         $class = $reflectionClass->getName();
 
-        if (!array_key_exists($class, static::$guessesCache)) {
+        if (!array_key_exists($class, $this->guessesCache)) {
             $config = [];
 
             foreach ($reflectionClass->getProperties() as $reflectionProperty) {
-                $name = $reflectionProperty->getName();
-
-                try {
-                    $guesser = $this->configurationGuesserRegistry->getPropertyConfigurationGuesser($reflectionProperty);
-                    $value = $guesser->guess($reflectionProperty);
-
-                    if ($value !== null) {
-                        $config[$name] = $value;
-                    }
-                } catch (\LogicException $e) {
-                    // Skipped
-                }
+                $this->guessProperty($config, $reflectionProperty, $context->copy());
             }
 
-            static::$guessesCache[$class] = $config;
+            $this->guessesCache[$class] = $config;
         }
 
-        return static::$guessesCache[$class];
+        return $this->guessesCache[$class];
     }
 
-    public function supports(\ReflectionClass $reflectionClass): bool
+    public function supports(\ReflectionClass $reflectionClass, Context $context): bool
     {
         return true;
     }
 
-//    protected function guessProperty(\ReflectionProperty $reflectionProperty): ?string
-//    {
-//        $name = $reflectionProperty->getName();
-//        $datetimeConfig = '<dateTimeBetween(%s, "now")>';
-//
-//        switch ($name) {
-//            case 'id':
-//                return null;
-//
-//            case 'username':
-//            case 'email':
-//                return sprintf('<%s()>', $name);
-//
-//            case 'dateAdd':
-//                return sprintf($datetimeConfig, '"-200 days"');
-//
-//            case 'dateUpdate':
-//                return sprintf($datetimeConfig, '$dateAdd');
-//
-//            default:
-//                // TODO: guess
-//                return '';
-//        }
-//    }
+    protected function guessProperty(array &$config, \ReflectionProperty $reflectionProperty, Context $context): void
+    {
+        $name = $reflectionProperty->getName();
+
+        try {
+            $guesser = $this->configurationGuesserRegistry->getPropertyConfigurationGuesser($reflectionProperty, $context);
+            $value = $guesser->guess($reflectionProperty, $context);
+
+            if ($value !== null) {
+                $config[$name] = $value;
+            }
+        } catch (\LogicException $e) {
+            // Skipped
+        }
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser;
 
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\Context;
+
 /**
  * Class DateUpdatePropertyGuesser
  *
@@ -11,14 +13,19 @@ namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser;
  */
 class DateUpdatePropertyGuesser extends DateTimePropertyGuesser
 {
-    public function guess(\ReflectionProperty $reflectionProperty): string
+    public function guess(\ReflectionProperty $reflectionProperty, Context $context): string
     {
-        return sprintf('<dateTimeBetween(%s, %s)>', '$dateAdd', static::$higherBound);
+        return $this->useFakerFormatter(
+            $context,
+            'dateTimeBetween',
+            '$dateAdd',
+            static::$higherBound
+        );
     }
 
-    public function supports(\ReflectionProperty $reflectionProperty): bool
+    public function supports(\ReflectionProperty $reflectionProperty, Context $context): bool
     {
-        return parent::supports($reflectionProperty) && $reflectionProperty->getName() === 'dateUpdate';
+        return parent::supports($reflectionProperty, $context) && $reflectionProperty->getName() === 'dateUpdate';
     }
 
     public function getPriority(): int

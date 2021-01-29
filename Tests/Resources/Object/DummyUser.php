@@ -29,6 +29,20 @@ final class DummyUser
     /** @var \DateTime */
     protected $dateUpdate;
 
+    /** @var string */
+    protected $anyString;
+
+    /** @var int */
+    protected $anyInt;
+
+    /** @var float */
+    protected $anyFloat;
+
+    /** @var array */
+    protected $anyArray;
+
+    protected $untypedProperty;
+
     /**
      * @return int
      */

@@ -3,6 +3,7 @@
 namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry;
 
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\ClassGuesser\ClassConfigurationGuesserInterface;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\Context;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\PropertyConfigurationGuesserInterface;
 
 /**
@@ -38,12 +39,12 @@ final class ConfigurationGuesserRegistry implements ConfigurationGuesserRegistry
         $this->propertyGuessersSorted = false;
     }
 
-    public function getClassConfigurationGuesser(\ReflectionClass $class): ClassConfigurationGuesserInterface
+    public function getClassConfigurationGuesser(\ReflectionClass $class, Context $context): ClassConfigurationGuesserInterface
     {
         $this->sortClassConfigurationGuessers();
 
         foreach ($this->classConfigurationGuessers as $guesser) {
-            if ($guesser->supports($class)) {
+            if ($guesser->supports($class, $context)) {
                 return $guesser;
             }
         }
@@ -51,12 +52,12 @@ final class ConfigurationGuesserRegistry implements ConfigurationGuesserRegistry
         throw new \LogicException('No class configuration guesser found for the class ' . $class->getName());
     }
 
-    public function getPropertyConfigurationGuesser(\ReflectionProperty $property): PropertyConfigurationGuesserInterface
+    public function getPropertyConfigurationGuesser(\ReflectionProperty $property, Context $context): PropertyConfigurationGuesserInterface
     {
         $this->sortPropertyConfigurationGuessers();
 
         foreach ($this->propertyConfigurationGuessers as $guesser) {
-            if ($guesser->supports($property)) {
+            if ($guesser->supports($property, $context)) {
                 return $guesser;
             }
         }

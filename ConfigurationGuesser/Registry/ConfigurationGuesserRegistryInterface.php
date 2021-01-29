@@ -3,6 +3,7 @@
 namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry;
 
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\ClassGuesser\ClassConfigurationGuesserInterface;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\Context;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\PropertyConfigurationGuesserInterface;
 
 /**
@@ -14,6 +15,6 @@ use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\Property
  */
 interface ConfigurationGuesserRegistryInterface
 {
-    public function getClassConfigurationGuesser(\ReflectionClass $class): ClassConfigurationGuesserInterface;
-    public function getPropertyConfigurationGuesser(\ReflectionProperty $property): PropertyConfigurationGuesserInterface;
+    public function getClassConfigurationGuesser(\ReflectionClass $class, Context $context): ClassConfigurationGuesserInterface;
+    public function getPropertyConfigurationGuesser(\ReflectionProperty $property, Context $context): PropertyConfigurationGuesserInterface;
 }

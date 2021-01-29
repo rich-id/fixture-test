@@ -11,20 +11,18 @@
     ],
     "support": {
         "email": "contact@richcongress.com",
-        "source": "https://github.com/richcongress/fixture-test-bundle",
-        "docs": "https://github.com/richcongress/fixture-test-bundle/blob/master/README.md",
-        "issues": "https://github.com/richcongress/fixture-test-bundle/issues"
+        "source": "https://github.com/richcongress/fixture-test",
+        "docs": "https://github.com/richcongress/fixture-test/blob/master/README.md",
+        "issues": "https://github.com/richcongress/fixture-test/issues"
     },
     "require": {
         "php": ">=7.3",
         "nelmio/alice": "^3.7",
         "php-di/phpdoc-reader": "^2.2",
-        "richcongress/bundle-toolbox": "*",
-        "richcongress/test-tools": "dev-master",
-        "symfony/console": "^4.0|^5.0"
+        "doctrine/annotations": "^1.11",
+        "richcongress/test-tools": "dev-master"
     },
     "require-dev": {
-        "doctrine/annotations": "^1.11",
         "roave/security-advisories": "dev-master"
     },
     "autoload": {

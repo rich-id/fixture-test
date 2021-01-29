@@ -3,6 +3,7 @@
 namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser;
 
 use PhpDocReader\PhpDocReader;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\Context;
 use RichCongress\FixtureTestBundle\Internal\CachedGetterTrait;
 
 /**
@@ -27,12 +28,17 @@ class DateTimePropertyGuesser extends AbstractPropertyConfigurationGuesser
     /** @var string */
     protected static $higherBound = '"now"';
 
-    public function guess(\ReflectionProperty $reflectionProperty): string
+    public function guess(\ReflectionProperty $reflectionProperty, Context $context): string
     {
-        return sprintf('<dateTimeBetween(%s, %s)>', static::$lowerBound, static::$higherBound);
+        return $this->useFakerFormatter(
+            $context,
+            'dateTimeBetween',
+            static::$lowerBound,
+            static::$higherBound
+        );
     }
 
-    public function supports(\ReflectionProperty $reflectionProperty): bool
+    public function supports(\ReflectionProperty $reflectionProperty, Context $context): bool
     {
         $phpDocReader = $this->getPhpDocReader();
         $type = $phpDocReader->getPropertyType($reflectionProperty);

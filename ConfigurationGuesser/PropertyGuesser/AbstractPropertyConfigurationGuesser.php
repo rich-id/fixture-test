@@ -2,6 +2,7 @@
 
 namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser;
 
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\Context;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\ConfigurationGuesserRegistryInterface;
 
 /**
@@ -27,5 +28,16 @@ abstract class AbstractPropertyConfigurationGuesser implements PropertyConfigura
     public function getPriority(): int
     {
         return static::$priority;
+    }
+
+    protected function useFakerFormatter(Context $context, string $formatter, ...$parameters): string
+    {
+        $function = sprintf('%s(%s)', $formatter, implode(', ', $parameters));
+
+        if ($context->has(Context::LOCALE)) {
+            return sprintf('<%s:%s>', $context->get(Context::LOCALE), $function);
+        }
+
+        return sprintf('<%s>', $function);
     }
 }

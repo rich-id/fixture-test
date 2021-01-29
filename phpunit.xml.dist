@@ -16,6 +16,7 @@
             <directory>Tests</directory>
             <directory>var</directory>
             <directory>vendor</directory>
+            <file>.phpstorm.meta.php</file>
             <file>phpunit-filter.php</file>
             <file>RichCongressUnitBundle.php</file>
         </exclude>
