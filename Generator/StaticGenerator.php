@@ -2,6 +2,7 @@
 
 namespace RichCongress\FixtureTestBundle\Generator;
 
+use RichCongress\FixtureTestBundle\Exception\TestToolsMissingException;
 use RichCongress\TestTools\Helper\ForceExecutionHelper;
 
 /**
@@ -23,6 +24,10 @@ final class StaticGenerator implements GeneratorInterface
 
     public static function make(string $class, array $parameters = [])
     {
+        if (!class_exists(ForceExecutionHelper::class)) {
+            throw new TestToolsMissingException('StaticGenerator', 'make');
+        }
+
         $object = new $class();
 
         foreach ($parameters as $property => $value) {
