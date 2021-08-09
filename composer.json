@@ -5,8 +5,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "RichCongress",
-            "homepage": "https://www.richcongress.com"
+            "name": "RichId",
+            "homepage": "https://www.rich-id.com"
         }
     ],
     "support": {
@@ -19,25 +19,45 @@
         "php": ">=7.3",
         "nelmio/alice": "^3.7",
         "php-di/phpdoc-reader": "^2.2",
-        "doctrine/annotations": "^1.11"
+        "doctrine/annotations": "^1.11",
+        "richcongress/bundle-toolbox": "^1.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-master",
-        "richcongress/test-tools": "dev-master"
+        "roave/security-advisories": "dev-latest",
+        "richcongress/test-tools": "dev-master",
+        "richcongress/static-analysis": "^0.1"
     },
     "autoload": {
         "psr-4": {
-            "RichCongress\\FixtureTestBundle\\": ""
+            "RichCongress\\FixtureTestBundle\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "RichCongress\\FixtureTestBundle\\Tests\\": "Tests/"
+            "RichCongress\\FixtureTestBundle\\Tests\\": "tests/"
         }
     },
     "config": {
-        "bin-dir": "bin",
         "discard-changes": true,
         "sort-packages": true
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || cghooks add --ignore-lock"
+        ],
+        "post-update-cmd": [
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || cghooks update"
+        ]
+    },
+    "extra": {
+        "hooks": {
+            "pre-commit": [
+                "./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix"
+            ],
+            "pre-push": [
+                "./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --dry-run",
+                "./vendor/richcongress/static-analysis/bin/static_analysis"
+            ]
+        }
     }
 }
