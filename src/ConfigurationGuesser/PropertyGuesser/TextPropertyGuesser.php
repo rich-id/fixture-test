@@ -6,31 +6,20 @@ namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser;
 
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Context;
 
-class DateTimePropertyGuesser extends AbstractPropertyConfigurationGuesser
+class TextPropertyGuesser extends AbstractPropertyConfigurationGuesser
 {
     /** @var int */
-    protected static $priority = -50;
-
-    /** @var string */
-    protected static $lowerBound = '"-200 days"';
-
-    /** @var string */
-    protected static $higherBound = '"now"';
+    protected static $priority = -110;
 
     public function guess(\ReflectionProperty $reflectionProperty, Context $context): string
     {
-        return $this->useFakerFormatter(
-            $context,
-            'dateTimeBetween',
-            static::$lowerBound,
-            static::$higherBound
-        );
+        return $this->useFakerFormatter($context, 'text', 50);
     }
 
     public function supports(\ReflectionProperty $reflectionProperty, Context $context): bool
     {
         $type = self::resolvePropertyType($reflectionProperty);
 
-        return $type === \DateTime::class;
+        return $type === 'string';
     }
 }

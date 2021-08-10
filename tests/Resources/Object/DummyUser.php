@@ -30,6 +30,9 @@ final class DummyUser
     /** @var \DateTime */
     private $dateUpdate;
 
+    /** @var bool */
+    private $anyBoolean;
+
     /** @var string */
     private $anyString;
 
@@ -78,5 +81,36 @@ final class DummyUser
     public function getDateUpdate(): ?\DateTime
     {
         return $this->dateUpdate;
+    }
+
+    public function isAnyBoolean(): ?bool
+    {
+        return $this->anyBoolean;
+    }
+
+    public function getAnyString(): ?string
+    {
+        return $this->anyString;
+    }
+
+    public function getAnyInt(): ?int
+    {
+        return $this->anyInt;
+    }
+
+    public function getAnyFloat(): ?float
+    {
+        return $this->anyFloat;
+    }
+
+    public function getAnyArray(): ?array
+    {
+        return $this->anyArray;
+    }
+
+    /** @return mixed */
+    public function getUntypedProperty()
+    {
+        return $this->untypedProperty;
     }
 }

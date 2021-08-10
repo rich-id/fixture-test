@@ -29,11 +29,15 @@ final class FixtureGeneratorTest extends TestCase
         self::assertMatchesRegularExpression('/(\w*)@(\w*).(\w*)/', $user->getEmail());
         self::assertNotNull($user->getUsername());
         self::assertNotNull($user->getPassword());
+        self::assertNotNull($user->getAnyFloat());
+        self::assertNotNull($user->getAnyInt());
+        self::assertNotNull($user->getAnyString());
+        self::assertNull($user->getAnyArray());
+        self::assertNull($user->getUntypedProperty());
         self::assertLessThanOrEqual(
             $user->getDateUpdate(),
             $user->getDateAdd()
         );
-        \var_dump($user);
     }
 
     public function testGenerationForUserWithForcedParameters(): void
@@ -51,6 +55,11 @@ final class FixtureGeneratorTest extends TestCase
         self::assertMatchesRegularExpression('/(\w*)@(\w*).(\w*)/', $user->getEmail());
         self::assertEquals('john_doe', $user->getUsername());
         self::assertEquals('S3cret', $user->getPassword());
+        self::assertNotNull($user->getAnyFloat());
+        self::assertNotNull($user->getAnyInt());
+        self::assertNotNull($user->getAnyString());
+        self::assertNull($user->getAnyArray());
+        self::assertNull($user->getUntypedProperty());
         self::assertLessThanOrEqual(
             $user->getDateUpdate(),
             $user->getDateAdd()

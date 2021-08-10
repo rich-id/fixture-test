@@ -60,6 +60,11 @@ final class DefaultClassConfigurationGuesserTest extends TestCase
                 'dateAdd'    => '<dateTimeBetween("-200 days", "now")>',
                 'dateUpdate' => '<dateTimeBetween($dateAdd, "now")>',
                 'password'   => '<password()>',
+                'id'         => null,
+                'anyBoolean' => '<boolean()>',
+                'anyString'  => '<text(50)>',
+                'anyInt'     => '<randomNumber()>',
+                'anyFloat'   => '<randomFloat()>',
             ],
             $configuration
         );
@@ -78,6 +83,11 @@ final class DefaultClassConfigurationGuesserTest extends TestCase
                 'dateAdd'    => '<fr_FR:dateTimeBetween("-200 days", "now")>',
                 'dateUpdate' => '<fr_FR:dateTimeBetween($dateAdd, "now")>',
                 'password'   => '<fr_FR:password()>',
+                'id'         => null,
+                'anyBoolean' => '<fr_FR:boolean()>',
+                'anyString'  => '<fr_FR:text(50)>',
+                'anyInt'     => '<fr_FR:randomNumber()>',
+                'anyFloat'   => '<fr_FR:randomFloat()>',
             ],
             $configuration
         );

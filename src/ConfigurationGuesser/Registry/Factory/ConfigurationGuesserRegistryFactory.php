@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\Factory;
 
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\ClassGuesser\DefaultClassConfigurationGuesser;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\BooleanPropertyGuesser;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\DateTimePropertyGuesser;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\DateUpdatePropertyGuesser;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\FakerFormatterNamePropertyGuesser;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\FloatPropertyGuesser;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\IdPropertyGuesser;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\IntegerPropertyGuesser;
+use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\TextPropertyGuesser;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\ConfigurationGuesserRegistry;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\ConfigurationGuesserRegistryInterface;
 
@@ -27,10 +31,14 @@ class ConfigurationGuesserRegistryFactory implements ConfigurationGuesserRegistr
 
     /** @var string[] */
     protected static $propertyConfigurationGuessers = [
+        BooleanPropertyGuesser::class,
         DateTimePropertyGuesser::class,
         DateUpdatePropertyGuesser::class,
         FakerFormatterNamePropertyGuesser::class,
+        FloatPropertyGuesser::class,
         IdPropertyGuesser::class,
+        IntegerPropertyGuesser::class,
+        TextPropertyGuesser::class,
     ];
 
     public function create(string $lang = 'en_UK'): ConfigurationGuesserRegistryInterface

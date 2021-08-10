@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser;
 
+use PhpDocReader\PhpDocReader;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Context;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\ConfigurationGuesserRegistryInterface;
 
@@ -40,5 +41,21 @@ abstract class AbstractPropertyConfigurationGuesser implements PropertyConfigura
         }
 
         return \sprintf('<%s>', $function);
+    }
+
+    protected static function resolvePropertyType(\ReflectionProperty $reflectionProperty): ?string
+    {
+        if (\method_exists($reflectionProperty, 'getType')) {
+            $reflectionType = $reflectionProperty->getType();
+            $type = $reflectionType ? (string) $reflectionType : null;
+
+            if ($type !== null) {
+                return $type;
+            }
+        }
+
+        $phpDocReader = new PhpDocReader();
+
+        return $phpDocReader->getPropertyType($reflectionProperty);
     }
 }

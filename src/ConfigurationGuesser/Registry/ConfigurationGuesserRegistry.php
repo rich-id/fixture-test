@@ -7,6 +7,8 @@ namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\ClassGuesser\ClassConfigurationGuesserInterface;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Context;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\PropertyConfigurationGuesserInterface;
+use RichCongress\FixtureTestBundle\Exception\NoClassConfigurationGuesserException;
+use RichCongress\FixtureTestBundle\Exception\NoPropertyConfigurationGuesserException;
 
 /**
  * Class ConfigurationGuesserRegistry.
@@ -50,7 +52,7 @@ final class ConfigurationGuesserRegistry implements ConfigurationGuesserRegistry
             }
         }
 
-        throw new \LogicException('No class configuration guesser found for the class ' . $class->getName());
+        throw new NoClassConfigurationGuesserException($class);
     }
 
     public function getPropertyConfigurationGuesser(\ReflectionProperty $property, Context $context): PropertyConfigurationGuesserInterface
@@ -63,7 +65,7 @@ final class ConfigurationGuesserRegistry implements ConfigurationGuesserRegistry
             }
         }
 
-        throw new \LogicException('No property configuration guesser found for the property ' . $property->getName());
+        throw new NoPropertyConfigurationGuesserException($property);
     }
 
     private function sortClassConfigurationGuessers(): void

@@ -8,29 +8,23 @@ use Nelmio\Alice\DataLoaderInterface;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Context;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\ConfigurationGuesserRegistryInterface;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\Factory\ConfigurationGuesserRegistryFactory;
-use RichCongress\FixtureTestBundle\Internal\CachedGetterTrait;
 use RichCongress\FixtureTestBundle\Loader\CustomLoader;
 
-/**
- * ClassGuesser FixtureGenerator.
- *
- * @author     Nicolas Guilloux <nguilloux@richcongress.com>
- * @copyright  2014 - 2020 RichCongress (https://www.richcongress.com)
- *
- * @method DataLoaderInterface getDataLoader()
- */
-final class FixtureGenerator implements GeneratorInterface
+class FixtureGenerator implements GeneratorInterface
 {
-    use CachedGetterTrait;
-
     /** @var ConfigurationGuesserRegistryInterface */
     protected $configurationGuesserRegistry;
 
     /** @var Context */
     protected $context;
 
-    public function __construct(ConfigurationGuesserRegistryInterface $configurationGuesserRegistry = null)
-    {
+    /** @var DataLoaderInterface */
+    protected $dataLoader;
+
+    public function __construct(
+        ConfigurationGuesserRegistryInterface $configurationGuesserRegistry = null,
+        DataLoaderInterface $dataLoader = null
+    ) {
         if ($configurationGuesserRegistry === null) {
             $factory = new ConfigurationGuesserRegistryFactory();
             $configurationGuesserRegistry = $factory->create();
@@ -38,6 +32,7 @@ final class FixtureGenerator implements GeneratorInterface
 
         $this->configurationGuesserRegistry = $configurationGuesserRegistry;
         $this->context = new Context();
+        $this->dataLoader = $dataLoader ?? new CustomLoader();
     }
 
     /** @return object */
@@ -48,7 +43,7 @@ final class FixtureGenerator implements GeneratorInterface
         $guessedConfig = $guesser->guess($reflectionClass, $this->context);
         $configuration = \array_merge($guessedConfig, $parameters);
 
-        $objectSet = $this->getDataLoader()->loadData(
+        $objectSet = $this->dataLoader->loadData(
             [
                 $class => [
                     'object' => $configuration,
@@ -66,8 +61,11 @@ final class FixtureGenerator implements GeneratorInterface
         return $this;
     }
 
-    public function createDataLoader(): DataLoaderInterface
+    /** @return object */
+    public static function make(string $class, array $parameters = [])
     {
-        return new CustomLoader();
+        $generator = new static();
+
+        return $generator->generate($class, $parameters);
     }
 }

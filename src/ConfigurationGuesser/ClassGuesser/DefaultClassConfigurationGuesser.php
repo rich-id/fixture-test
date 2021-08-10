@@ -49,10 +49,7 @@ class DefaultClassConfigurationGuesser extends AbstractClassConfigurationGuesser
         try {
             $guesser = $this->configurationGuesserRegistry->getPropertyConfigurationGuesser($reflectionProperty, $context);
             $value = $guesser->guess($reflectionProperty, $context);
-
-            if ($value !== null) {
-                $config[$name] = $value;
-            }
+            $config[$name] = $value;
         } catch (\LogicException $e) {
             // Skipped
         }

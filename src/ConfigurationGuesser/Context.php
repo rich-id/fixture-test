@@ -14,8 +14,8 @@ final class Context
 {
     public const LOCALE = 'language';
 
-    /** @var array */
-    private $context = [];
+    /** @var array<string, mixed> */
+    private $context;
 
     public function __construct(array $context = [])
     {
