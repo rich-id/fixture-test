@@ -11,6 +11,9 @@
     <php>
         <ini name="error_reporting" value="-1"/>
         <env name="CONFIG_TYPE" value="default"/>
+
+        <!-- Lock the seed -->
+        <!-- <env name="SEED" value="1"/> -->
     </php>
 
     <testsuites>
