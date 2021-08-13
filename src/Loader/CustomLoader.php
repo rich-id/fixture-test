@@ -15,7 +15,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
  * @author     Nicolas Guilloux <nguilloux@richcongress.com>
  * @copyright  2014 - 2020 RichCongress (https://www.richcongress.com)
  */
-final class CustomLoader extends NativeLoader
+class CustomLoader extends NativeLoader
 {
     /** @var int|null */
     protected static $count;

@@ -107,6 +107,9 @@ This version of the bundle requires Symfony 4.4+ and PHP 7.3+.
 composer require richcongress/fixture-test
 ----
 
+=== Symfony
+
+If you plan to use it with Symfony, please install the `richcongress/bundle-toolbox` before, and makes sure that the `RichCongressFixtureTestBundle` is in the `bundles.php`.
 
 == Documentation
 
