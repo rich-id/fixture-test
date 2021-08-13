@@ -7,6 +7,7 @@ namespace RichCongress\FixtureTestBundle\Tests\ConfigurationGuesser\PropertyGues
 use PHPUnit\Framework\TestCase;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Context;
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\IdPropertyGuesser;
+use RichCongress\FixtureTestBundle\Exception\SkipPropertyConfigurationGuessingException;
 use RichCongress\FixtureTestBundle\Tests\Resources\Object\DummyUser;
 
 /**
@@ -39,7 +40,7 @@ final class IdPropertyGuesserTest extends TestCase
         $isSupported = $guesser->supports($reflectionProperty, $context);
         self::assertTrue($isSupported);
 
-        $configuration = $guesser->guess($reflectionProperty, $context);
-        self::assertNull($configuration);
+        $this->expectException(SkipPropertyConfigurationGuessingException::class);
+        $guesser->guess($reflectionProperty, $context);
     }
 }

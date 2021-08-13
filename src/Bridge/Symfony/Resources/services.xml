@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults autowire="true" autoconfigure="true" public="false" />
+
+        <!-- Generator -->
+        <service id="RichCongress\FixtureTestBundle\Bridge\Symfony\Generator\SymfonyFixtureGenerator" />
+        <service id="RichCongress\FixtureTestBundle\Generator\GeneratorInterface"
+                 alias="RichCongress\FixtureTestBundle\Bridge\Symfony\Generator\SymfonyFixtureGenerator"
+        />
+
+        <!-- ClassGuessers -->
+        <service id="RichCongress\FixtureTestBundle\ConfigurationGuesser\ClassGuesser\DefaultClassConfigurationGuesser" />
+
+        <!-- PropertyGuessers -->
+        <service id="RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\BooleanPropertyGuesser" />
+        <service id="RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\DateTimePropertyGuesser" />
+        <service id="RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\DateUpdatePropertyGuesser" />
+        <service id="RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\FakerFormatterNamePropertyGuesser" />
+        <service id="RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\FloatPropertyGuesser" />
+        <service id="RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\IdPropertyGuesser" />
+        <service id="RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\IntegerPropertyGuesser" />
+        <service id="RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser\TextPropertyGuesser" />
+
+        <!-- Configuration guesser -->
+        <service id="RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\ConfigurationGuesserRegistry" />
+        <service id="RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\ConfigurationGuesserRegistryInterface"
+                 alias="RichCongress\FixtureTestBundle\ConfigurationGuesser\Registry\ConfigurationGuesserRegistry"
+        />
+
+        <!-- DataLoader -->
+        <service id="RichCongress\FixtureTestBundle\Loader\CustomLoader" />
+        <service id="Nelmio\Alice\DataLoaderInterface" alias="RichCongress\FixtureTestBundle\Loader\CustomLoader"/>
+    </services>
+</container>

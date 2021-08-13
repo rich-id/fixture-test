@@ -19,13 +19,13 @@
         "php": ">=7.3",
         "nelmio/alice": "^3.7",
         "php-di/phpdoc-reader": "^2.2",
-        "doctrine/annotations": "^1.11",
-        "richcongress/bundle-toolbox": "^1.0"
+        "doctrine/annotations": "^1.11"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest",
+        "richcongress/bundle-toolbox": "^1.0",
+        "richcongress/static-analysis": "^0.1",
         "richcongress/test-tools": "dev-master",
-        "richcongress/static-analysis": "^0.1"
+        "roave/security-advisories": "dev-latest"
     },
     "autoload": {
         "psr-4": {

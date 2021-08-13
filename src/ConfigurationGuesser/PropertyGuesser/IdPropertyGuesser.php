@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RichCongress\FixtureTestBundle\ConfigurationGuesser\PropertyGuesser;
 
 use RichCongress\FixtureTestBundle\ConfigurationGuesser\Context;
+use RichCongress\FixtureTestBundle\Exception\SkipPropertyConfigurationGuessingException;
 
 /**
  * Class IdPropertyGuesser.
@@ -18,7 +19,7 @@ class IdPropertyGuesser extends AbstractPropertyConfigurationGuesser
 
     public function guess(\ReflectionProperty $reflectionProperty, Context $context): ?int
     {
-        return null;
+        throw new SkipPropertyConfigurationGuessingException($reflectionProperty);
     }
 
     public function supports(\ReflectionProperty $reflectionProperty, Context $context): bool
