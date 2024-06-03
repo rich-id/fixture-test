@@ -21,9 +21,9 @@
         "php-di/phpdoc-reader": "^2.2"
     },
     "require-dev": {
-        "richcongress/bundle-toolbox": "v2.x-dev",
-        "richcongress/static-analysis": "^0.1",
-        "richcongress/test-tools": "dev-master",
+        "richcongress/bundle-toolbox": "^2.0",
+        "richcongress/static-analysis": "^0.2",
+        "richcongress/test-tools": "^0.2",
         "roave/security-advisories": "dev-latest"
     },
     "autoload": {

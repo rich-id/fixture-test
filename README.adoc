@@ -100,7 +100,7 @@ If we serialize the class in Json, it will give something like this:
 
 == Installation
 
-This version of the bundle requires Symfony 4.4+ and PHP 7.3+.
+This version of the bundle requires Symfony 6.0+ and PHP 8.1+.
 
 [source,bash]
 ----
