@@ -23,7 +23,7 @@
     "require-dev": {
         "richcongress/bundle-toolbox": "^2.0",
         "richcongress/static-analysis": "^0.2",
-        "richcongress/test-tools": "^0.2",
+        "richcongress/test-tools": "dev-phpunit-10",
         "roave/security-advisories": "dev-latest"
     },
     "autoload": {
