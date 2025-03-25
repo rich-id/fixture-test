@@ -21,6 +21,14 @@ final class StaticGenerator implements GeneratorInterface
         return static::make($class, $parameters);
     }
 
+    /**
+     * @template T
+     *
+     * @param class-string<T> $class
+     * @param array<mixed>    $parameters
+     *
+     * @return T
+     */
     public static function make(string $class, array $parameters = [])
     {
         if (!\class_exists(ForceExecutionHelper::class)) {
