@@ -20,7 +20,7 @@ class CustomLoader extends NativeLoader
     /** @var int|null */
     protected static $count;
 
-    public function __construct(FakerGenerator $fakerGenerator = null)
+    public function __construct(?FakerGenerator $fakerGenerator = null)
     {
         if (self::$count === null) {
             self::$count = (int) ($_ENV['SEED'] ?? \random_int(0, PHP_INT_MAX));
