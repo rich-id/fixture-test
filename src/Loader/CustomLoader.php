@@ -22,18 +22,18 @@ class CustomLoader extends NativeLoader
 
     public function __construct(?FakerGenerator $fakerGenerator = null)
     {
-        if (self::$count === null) {
-            self::$count = (int) ($_ENV['SEED'] ?? \random_int(0, PHP_INT_MAX));
-        }
-
         parent::__construct($fakerGenerator);
     }
 
     public function getSeed(): int
     {
-        self::$count = (self::$count + 1) % PHP_INT_MAX;
+        $seed = (int) \getenv('PHPUNIT_SEED');
 
-        return self::$count;
+        if ($seed === 0) {
+            throw new MissingSeedException();
+        }
+
+        return $seed;
     }
 
     public function createPropertyAccessor(): PropertyAccessorInterface
